@@ -43,8 +43,8 @@ fazer a leitura dos parâmetros de calibração e mostrar dados no display do Sh
 ODShield Shield_OD;
 
 int relayPin = 13; // Usado para controlar aeradores. Quando HIGH irá ligar o aerador. Quando LOW desligará
-float minOxigen = 5.0; // Quando estiver abaixo deste valor liga o aerador
-float maxOxigen = 6.0; // Quando estiver acima deste valor desliga o aerador
+float minOxygen = 5.0; // Quando estiver abaixo deste valor liga o aerador
+float maxOxygen = 6.0; // Quando estiver acima deste valor desliga o aerador
 
 void setup() {
     Serial.begin(9600);
@@ -64,10 +64,12 @@ void loop() {
     // mg/l
     od = Shield_OD.OD();                       //Faz a leitura do valor de OD do Shield.
 
-    if ( od <=  ) {
-      digitalWrite( 13, LOW );
-    } else {
+    if ( od <= minOxygen ) {
       digitalWrite( 13, HIGH );
+    }
+    
+    if ( od >= maxOxygen ) {
+      digitalWrite( 13, LOW );
     }
 
     dtostrf(od, 2, 1, vetor_OD);               //Faz a leitura do OD e converte a variável float "OD" em string.
